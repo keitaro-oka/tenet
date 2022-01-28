@@ -404,6 +404,9 @@ int
 Dataflow::GetEnergy(isl_union_map* space_time_to_neighbor)
 {
 	int energy = GetMacNum();  // energy cost of MAC
+  printf("compute energy %d\n", energy);
+  int energy_tmp = energy;
+  int energy_tmp2;
 	auto [input, output] = _st.GetTensorList();
 	for (auto& iter : input)
 	{
@@ -413,7 +416,11 @@ Dataflow::GetEnergy(isl_union_map* space_time_to_neighbor)
 			isl_union_map_copy(space_time_to_neighbor));
 		energy += l2_multiplier * GetL2Write(iter, AccessType::READ,
 			isl_union_map_copy(space_time_to_neighbor));
+
 	}
+  printf("read energy %d\n", energy - energy_tmp);
+  energy_tmp2 = energy;
+
 	for (auto& iter:output)
 	{
 		energy += l1_multiplier * GetL1Read(iter, AccessType::WRITE);
@@ -423,6 +430,9 @@ Dataflow::GetEnergy(isl_union_map* space_time_to_neighbor)
 		energy += l2_multiplier * GetL2Write(iter, AccessType::WRITE,
 			isl_union_map_copy(space_time_to_neighbor));
 	}
+  printf("write energy %d\n", energy - energy_tmp2);
+
+
 	isl_union_map_free(space_time_to_neighbor);
 	return energy;
 }

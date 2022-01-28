@@ -51,4 +51,4 @@ make > /dev/null; make check > /dev/null; make install > /dev/null
 echo "Leaving back to external/"
 cd ..
 echo "Remove NTL and Barvinok Package"
-rm -rf barvinok ntl
+#rm -rf barvinok ntl

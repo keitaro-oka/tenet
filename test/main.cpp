@@ -37,9 +37,9 @@ void DataflowAnalysis(
 	}
 	auto [input, output] = st.GetTensorList();
 	Dataflow df(move(st), move(pe), move(mp)); // st, pe and mp is moved into df, DONT USE THEM AGAIN!
-
 	isl_union_map *space_time_to_neighbor = df.MapSpaceTimeToNeighbor();
-
+  int energy = df.GetEnergy(isl_union_map_copy(space_time_to_neighbor));
+  printf("energy:%d\n", energy);
 #if VERBOSE
 	for (auto& iter : input)
 	{
@@ -109,6 +109,8 @@ int main(int argc, char * argv[])
 {
 	shared_ptr<ISL_Context> context{make_shared<ISL_Context>(stdout)};
 	auto dir = filesystem::directory_entry(path("./data") / EXPERIMENT_PREFIX / path("experiment"));
+  std::cout << "dir: " << dir << std::endl;
+  std::cout << "context: " << context << std::endl;
 	for (auto&f : filesystem::directory_iterator(dir))
 		experiment(context, f.path());
 	return 0;

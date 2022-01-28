@@ -175,23 +175,105 @@ def get_space_str(dim_num, val1, val2, val3, val4, val5, val6, val1_alloc=0, val
     suffix="]}"
     space_str_tmp = ""
     if dim_num == 3:
-        space_str=val1+"%"+str(val1_alloc)+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")"
-        space_str=space_str+","+val3+"%"+str(val3_alloc)
+        if val1 == 'rx' or val1 == 'ry':
+            space_str = val1
+        else:
+            space_str=val1+"%"+str(val1_alloc)
+
+        if val2 == 'rx' or val2 == 'ry':
+            space_str=space_str+"+"+str(val1_alloc)+"*"+val2
+        else:
+            space_str=space_str+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")"
+
+        if val3 == 'rx' or val3 == 'ry':
+            space_str=space_str+","+val3
+        else:
+            space_str=space_str+","+val3+"%"+str(val3_alloc)
         space_str_tmp = prefix+space_str+suffix
+
     if dim_num == 4:
-        space_str=val1+"%"+str(val1_alloc)+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")"
-        space_str=space_str+","+val3+"%"+str(val3_alloc)+"+"+str(val3_alloc)+"*("+val4+"%"+str(val4_alloc)+")"
+        if val1 == 'rx' or val1 == 'ry':
+            space_str=val1
+        else:
+            space_str=val1+"%"+str(val1_alloc)
+
+        if val2 == 'rx' or val2 == 'ry':
+            space_str=space_str+"+"+str(val1_alloc)+"*"+val2
+        else:
+            space_str=space_str+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")"
+
+        if val3 == 'rx' or val3 == 'ry':
+            space_str=space_str+","+val3
+        else:
+            space_str=space_str+","+val3+"%"+str(val3_alloc)
+
+        if val4 == 'rx' or val4 == 'ry':
+            space_str=space_str+"+"+str(val3_alloc)+"*("+val4
+        else:
+            space_str=space_str+"+"+str(val3_alloc)+"*("+val4+"%"+str(val4_alloc)+")"
         space_str_tmp = prefix+space_str+suffix
+
     if dim_num == 5:
         tmp_alloc = val1_alloc * val2_alloc
-        space_str=val1+"%"+str(val1_alloc)+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")+"+str(tmp_alloc)+"*("+val3+"%"+str(val3_alloc)+")"
-        space_str=space_str+","+val4+"%"+str(val4_alloc)+"+"+str(val4_alloc)+"*("+val5+"%"+str(val5_alloc)+")"
+
+        if val1 == 'rx' or val1 == 'ry':
+            space_str=val1
+        else:
+            space_str=val1+"%"+str(val1_alloc)
+
+        if val2 == 'rx' or val2 == 'ry':
+            space_str=space_str+"+"+str(val1_alloc)+"*"+val2+"+"
+        else:
+            space_str=space_str+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")+"
+
+        if val3 == 'rx' or val3 == 'ry':
+            space_str=space_str+str(tmp_alloc)+"*"+val3
+        else:
+            space_str=space_str+str(tmp_alloc)+"*("+val3+"%"+str(val3_alloc)+")"
+
+        if val4 == 'rx' or val4 == 'ry':
+            space_str=space_str+","+val4
+        else:
+            space_str=space_str+","+val4+"%"+str(val4_alloc)
+
+        if val5 == 'rx' or val5 == 'ry':
+            space_str=space_str+"+"+str(val4_alloc)+val5
+        else:
+            space_str=space_str+"+"+str(val4_alloc)+"*("+val5+"%"+str(val5_alloc)+")"
+
         space_str_tmp = prefix+space_str+suffix
     if dim_num == 6:
         tmp_alloc = val1_alloc * val2_alloc
-        space_str=val1+"%"+str(val1_alloc)+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")+"+str(tmp_alloc)+"*("+val3+"%"+str(val3_alloc)+")"
+        if val1 == 'rx' or val1 == 'ry':
+            space_str=val1
+        else:
+            space_str=val1+"%"+str(val1_alloc)
+
+        if val2 == 'rx' or val2 == 'ry':
+            space_str=space_str+"+"+str(val1_alloc)+"*"+val2+"+"
+        else:
+            space_str=space_str+"+"+str(val1_alloc)+"*("+val2+"%"+str(val2_alloc)+")+"
+
+        if val3 == 'rx' or val3 == 'ry':
+            space_str=space_str+str(tmp_alloc)+"*"+val3
+        else:
+            space_str=space_str+str(tmp_alloc)+"*("+val3+"%"+str(val3_alloc)+")"
+
         tmp_alloc = val4_alloc * val5_alloc
-        space_str=space_str+","+val4+"%"+str(val4_alloc)+"+"+str(val4_alloc)+"*("+val5+"%"+str(val5_alloc)+")+"+str(tmp_alloc)+"*("+val6+"%"+str(val6_alloc)+")"
+        if val4 == 'rx' or val4 == 'ry':
+            space_str=space_str+","+val4+"+"
+        else:
+            space_str=space_str+","+val4+"%"+str(val4_alloc)+"+"
+
+        if val5 == 'rx' or val5 == 'ry':
+            space_str=space_str+str(val4_alloc)+"*"+val5+"+"
+        else:
+            space_str=space_str+str(val4_alloc)+"*("+val5+"%"+str(val5_alloc)+")+"
+
+        if val6 == 'rx' or val6 == 'ry':
+            space_str=space_str+str(tmp_alloc)+"*"+val6
+        else:
+            space_str=space_str+str(tmp_alloc)+"*("+val6+"%"+str(val6_alloc)+")"
         space_str_tmp = prefix+space_str+suffix
     print(space_str_tmp)
     return space_str_tmp
@@ -200,7 +282,7 @@ print("num val = 3")
 space_num=0
 space_num2 = 0
 print("------")
-dim_sel_l=[('rx','ry','ic'),('rx','ic','ry'),('rx','ry','oc'),('rx','oc','ry')]
+dim_sel_l=[('rx','ry','c'),('rx','c','ry'),('rx','ry','k'),('rx','k','ry')]
 print(dim_sel_l) 
 for dim_sel_obj in dim_sel_l:
     space_num2 = space_num2 + 1
@@ -209,7 +291,7 @@ for dim_sel_obj in dim_sel_l:
 
     print(val1, val2, val3)
 
-    if (val1 == 'rx') and (val2 == 'ry') and ((val3 == 'ic') or (val3 == 'oc')):
+    if (val1 == 'rx') and (val2 == 'ry') and ((val3 == 'c') or (val3 == 'k')):
         val1_alloc=r_size
         val2_alloc=r_size
         val3_alloc = num_pe_row
@@ -217,7 +299,7 @@ for dim_sel_obj in dim_sel_l:
         val_permu_l = [((val1,val1_alloc),(val2, val2_alloc))]
         process_write_val3(val_permu_l, val3_alloc, space_num)
 
-    elif (val1 == 'rx') and ((val2 == 'ic') or (val2 == 'oc')) and (val3 == 'ry'):
+    elif (val1 == 'rx') and ((val2 == 'c') or (val2 == 'k')) and (val3 == 'ry'):
         val1_alloc=r_size
         val2_alloc=int(math.floor(num_pe_row/r_size))
         val3_alloc =r_size
@@ -240,7 +322,7 @@ space_num=0
 space_num2=0
 
 print("------")
-dim_sel_l=[('rx','ry','ox','oy'),('rx','ox','ry','oy'),('rx','ry','ic','oc'),('rx','ic','ry','oc')]
+dim_sel_l=[('rx','ry','ox','oy'),('rx','ox','ry','oy'),('rx','ry','c','k'),('rx','c','ry','k')]
 print(dim_sel_l) 
 for dim_sel_obj in dim_sel_l:
     space_num2 = space_num2 + 1
@@ -260,7 +342,7 @@ for dim_sel_obj in dim_sel_l:
             val_permu_l2 = [((val3,val3_alloc),(val4,val4_alloc))]
             process_write_val4(val_permu_l1, val_permu_l2, space_num)
 
-    elif ((val1 == 'rx') and (val2 == 'ry') and (val3 == 'ic') and (val4 == 'oc')):
+    elif ((val1 == 'rx') and (val2 == 'ry') and (val3 == 'c') and (val4 == 'k')):
         val1_alloc = r_size
         val2_alloc = r_size
         space_num = space_num + 1
@@ -275,7 +357,7 @@ for dim_sel_obj in dim_sel_l:
             process_write_val4(val_permu_l1, val_permu_l2, space_num)
         
     elif ((val1 == 'rx') and (val2 == 'ox') and (val3 == 'ry') and (val4 == 'oy')) or \
-            ((val1 == 'rx') and (val2 == 'ic') and (val3 == 'ry') and (val4 == 'oc')):
+            ((val1 == 'rx') and (val2 == 'c') and (val3 == 'ry') and (val4 == 'k')):
         val1_alloc = r_size
         val2_alloc = int(math.floor(num_pe_row/r_size))
         val3_alloc = r_size
@@ -297,8 +379,8 @@ space_num=0
 space_num2=0
 
 print("------")
-dim_sel_l=[('rx','ry','ox','oy','oc'),('rx','ry','oc','ox','oy'),('rx','ox','oy','ry','oc'),('rx','ox','oc','ry','oy'),\
-        ('ox','oy','oc','rx','ry'),('rx','ry','ox','oy','ic'),('rx','ry','ic','ox','oy'),('rx','ox','oy','ry','ic'),('rx','ox','ic','ry','oy'),('ox','oy','ic','rx','ry')]
+dim_sel_l=[('rx','ry','ox','oy','k'),('rx','ry','k','ox','oy'),('rx','ox','oy','ry','k'),('rx','ox','k','ry','oy'),\
+        ('ox','oy','k','rx','ry'),('rx','ry','ox','oy','c'),('rx','ry','c','ox','oy'),('rx','ox','oy','ry','c'),('rx','ox','c','ry','oy'),('ox','oy','c','rx','ry')]
 
 print(dim_sel_l) 
 for dim_sel_obj in dim_sel_l:
@@ -311,7 +393,7 @@ for dim_sel_obj in dim_sel_l:
 
     space_num=space_num+1
 
-    if (val1 == 'rx') and (val2 == 'ry') and (val3 == 'ox') and (val4 == 'oy') and ((val5 == 'oc') or (val5 == 'ic')):
+    if (val1 == 'rx') and (val2 == 'ry') and (val3 == 'ox') and (val4 == 'oy') and ((val5 == 'k') or (val5 == 'c')):
         val1_alloc = r_size
         val2_alloc = r_size
         val3_alloc = int(math.floor(num_pe_row / (r_size*r_size)))
@@ -329,7 +411,7 @@ for dim_sel_obj in dim_sel_l:
 
             process_write_val5(val_permu_l1, val_permu_l2, space_num)
 
-    elif (val1 == 'rx') and (val2 == 'ry') and ((val3 == 'oc') or (val3 == 'ic')) and (val4 == 'ox') and (val5 == 'oy'): 
+    elif (val1 == 'rx') and (val2 == 'ry') and ((val3 == 'k') or (val3 == 'c')) and (val4 == 'ox') and (val5 == 'oy'): 
         val1_alloc = r_size
         val2_alloc = r_size
         val3_alloc = int(math.floor(num_pe_row / (r_size*r_size)))
@@ -345,7 +427,7 @@ for dim_sel_obj in dim_sel_l:
             val_permu_l2 = [((val4,val4_alloc),(val5,val5_alloc))]
             process_write_val5(val_permu_l1, val_permu_l2,space_num)
 
-    elif (val1 == 'rx') and (val2 == 'ox') and (val3 == 'oy') and (val4 == 'ry') and ((val5 == 'oc') or (val5 == 'ic')): 
+    elif (val1 == 'rx') and (val2 == 'ox') and (val3 == 'oy') and (val4 == 'ry') and ((val5 == 'k') or (val5 == 'c')): 
         val1_alloc = r_size
         val4_alloc = r_size
         val5_alloc = int(math.floor(num_pe_row/r_size))
@@ -362,7 +444,7 @@ for dim_sel_obj in dim_sel_l:
             val_permu_l2 = list(itertools.permutations(val_tuple_l2))
             process_write_val5(val_permu_l1, val_permu_l2,space_num)
 
-    elif (val1 == 'rx') and (val2 == 'ox') and ((val3 == 'oc') or (val3 == 'ic')) and (val4 == 'ry') and (val5 == 'oy'): 
+    elif (val1 == 'rx') and (val2 == 'ox') and ((val3 == 'k') or (val3 == 'c')) and (val4 == 'ry') and (val5 == 'oy'): 
         val1_alloc = r_size
         val4_alloc = r_size
         val5_alloc = int(math.floor(num_pe_row/r_size))
@@ -379,7 +461,7 @@ for dim_sel_obj in dim_sel_l:
 
             process_write_val5(val_permu_l1, val_permu_l2, space_num)
 
-    elif (val1 == 'ox') and (val2 == 'oy') and ((val3 == 'oc') or (val3 == 'ic')) and (val4 == 'rx') and (val5 == 'ry'): 
+    elif (val1 == 'ox') and (val2 == 'oy') and ((val3 == 'k') or (val3 == 'c')) and (val4 == 'rx') and (val5 == 'ry'): 
         val4_alloc = r_size
         val5_alloc = r_size
         val3_alloc = int(math.floor(num_pe_row/(r_size*r_size)))
@@ -402,8 +484,8 @@ for dim_sel_obj in dim_sel_l:
 print("num val = 6")
 
 print("------")
-dim_sel_l=[('rx','ry','ox','oy','ic','oc'),('rx','ry','ic','ox','oy','oc'),('rx','ry','oc','ox','oy','ic'),\
-        ('rx','ox','oy','ry','ic','oc'),('rx','ic','oc','ry','ox','oy'),('rx','ox','ic','ry','oy','oc')]
+dim_sel_l=[('rx','ry','ox','oy','c','k'),('rx','ry','c','ox','oy','k'),('rx','ry','k','ox','oy','c'),\
+        ('rx','ox','oy','ry','c','k'),('rx','c','k','ry','ox','oy'),('rx','ox','c','ry','oy','k')]
 
 print(dim_sel_l) 
 for dim_sel_obj in dim_sel_l:
@@ -413,7 +495,7 @@ for dim_sel_obj in dim_sel_l:
     print("val1", "val2", "val3", "val4", "val5", "val6")
     print(val1, val2, val3, val4, val5, val6)
 
-    if (val1 == 'rx') and (val2 == 'ry') and (val3 == 'ox') and (val4 == 'oy') and (val5 == 'ic') and (val6 == 'oc'):
+    if (val1 == 'rx') and (val2 == 'ry') and (val3 == 'ox') and (val4 == 'oy') and (val5 == 'c') and (val6 == 'k'):
         val1_alloc = r_size
         val2_alloc = r_size
         val3_alloc = int(math.floor(num_pe_row / (r_size*r_size)))
@@ -430,7 +512,7 @@ for dim_sel_obj in dim_sel_l:
                 val_permu_l2 = list(itertools.permutations(val_tuple_l2))
                 process_write_val6(val_permu_l1, val_permu_l2, space_num)
 
-    elif (val1 == 'rx') and (val2 == 'ry') and (val3 == 'ic') and (val4 == 'ox') and (val5 == 'oy') and (val6 == 'oc'):
+    elif (val1 == 'rx') and (val2 == 'ry') and (val3 == 'c') and (val4 == 'ox') and (val5 == 'oy') and (val6 == 'k'):
         val1_alloc = r_size
         val2_alloc = r_size
         val3_alloc = int(math.floor(num_pe_row / (r_size*r_size)))
@@ -449,7 +531,7 @@ for dim_sel_obj in dim_sel_l:
                                 ((val6,val6_alloc),(val4,val4_alloc),(val5,val5_alloc))]
                 process_write_val6(val_permu_l1, val_permu_l2, space_num)
 
-    elif (val1 == 'rx') and (val2 == 'ry') and (val3 == 'oc') and (val4 == 'ox') and (val5 == 'oy') and (val6 == 'ic'):
+    elif (val1 == 'rx') and (val2 == 'ry') and (val3 == 'k') and (val4 == 'ox') and (val5 == 'oy') and (val6 == 'c'):
         val1_alloc = r_size
         val2_alloc = r_size
         val3_alloc = int(math.floor(num_pe_row / (r_size*r_size)))
@@ -468,7 +550,7 @@ for dim_sel_obj in dim_sel_l:
                                 ((val6,val6_alloc),(val4,val4_alloc),(val5,val5_alloc))]
                 process_write_val6(val_permu_l1, val_permu_l2, space_num)
 
-    elif (val1 == 'rx') and (val2 == 'ox') and (val3 == 'oy') and (val4 == 'ry') and (val5 == 'ic') and (val6 == 'oc'):
+    elif (val1 == 'rx') and (val2 == 'ox') and (val3 == 'oy') and (val4 == 'ry') and (val5 == 'c') and (val6 == 'k'):
         val1_alloc = r_size
         val4_alloc = r_size
         space_num = space_num + 1
@@ -489,7 +571,7 @@ for dim_sel_obj in dim_sel_l:
                 process_write_val6(val_permu_l1, val_permu_l2, space_num)
 
     #5
-    elif (val1 == 'rx') and (val2 == 'ic') and (val3 == 'oc') and (val4 == 'ry') and (val5 == 'ox') and (val6 == 'oy'):
+    elif (val1 == 'rx') and (val2 == 'c') and (val3 == 'k') and (val4 == 'ry') and (val5 == 'ox') and (val6 == 'oy'):
         val1_alloc = r_size
         val4_alloc = r_size
         space_num = space_num + 1
@@ -510,7 +592,7 @@ for dim_sel_obj in dim_sel_l:
                 process_write_val6(val_permu_l1, val_permu_l2, space_num)
 
     # 6
-    elif (val1 == 'rx') and (val2 == 'ox') and (val3 == 'ic') and (val4 == 'ry') and (val5 == 'oy') and (val6 == 'oc'):
+    elif (val1 == 'rx') and (val2 == 'ox') and (val3 == 'c') and (val4 == 'ry') and (val5 == 'oy') and (val6 == 'k'):
         val1_alloc = r_size
         val4_alloc = r_size
         space_num = space_num + 1
